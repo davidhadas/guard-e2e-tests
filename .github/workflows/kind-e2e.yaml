@@ -77,7 +77,7 @@ jobs:
     
     - name: Run e2e Tests
       run: |
-        ./test/e2e-tests.sh
+        ./test/e2e/e2e-tests.sh
 
     - uses: chainguard-dev/actions/kind-diag@main
       # Only upload logs on failure.
