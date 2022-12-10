@@ -62,7 +62,7 @@ jobs:
         repository: knative-sandbox/security-guard 
 
     - name: Install  security-guard  
-      run: ko apply -Rf ./security-guard/config 
+      run: ko apply -Rf ./config 
 
     - name: install test service
       run: |
