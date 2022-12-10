@@ -58,12 +58,7 @@ jobs:
 
     - name: Check out security-guard code onto GOPATH
       uses: actions/checkout@v3
-
-    - name: Install security-guard
-      run: |
-        set -o pipefail
-        ko apply -Rf config/
-        
+          
     - name: install test service
       run: |
         kubectl apply -f 
@@ -90,6 +85,6 @@ jobs:
       if: ${{ failure() }}
       with:
         cluster-resources: nodes,namespaces,crds
-        namespace-resources: pods,svc,king,httpproxy
+        namespace-resources: pods,svc,guardians.guard.security.knative.dev
         artifact-name: logs-${{ matrix.k8s-version }}
       
