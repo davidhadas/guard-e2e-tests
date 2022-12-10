@@ -33,7 +33,18 @@ jobs:
 
     - name: Setup ko
       uses: imjasonh/setup-ko@v0.6
-      
+
+    - name: Install kn
+      run: brew install knative/client/kn
+
+    - name: Check out security-guard code onto GOPATH
+      uses: actions/checkout@v3
+    
+    - name: Check out security-guard code onto GOPATH
+      uses: actions/checkout@v3
+      with:
+        repository: knative-sandbox/security-guard 
+  
     - name: Setup KinD
       uses: chainguard-dev/actions/setup-kind@main
       with:
@@ -53,20 +64,12 @@ jobs:
           --patch '{"data":{"ingress-class":"kourier.ingress.networking.knative.dev"}}'
         kubectl patch cm config-domain -nknative-serving -p '{"data":{"example.com":""}}'
       
-    - name: Install kn
-      run: brew install knative/client/kn
-
-    - name: Check out security-guard code onto GOPATH
-      uses: actions/checkout@v3
-      with:
-        repository: knative-sandbox/security-guard 
-
     - name: Install  security-guard  
       run: ko apply -Rf ./config 
 
     - name: install test service
       run: |
-        kn service create test \
+        kn service create httptest \
            --image gcr.io/knative-samples/helloworld-go \
            --env "TARGET=Secured World" \
            --annotation features.knative.dev/queueproxy-podinfo=enabled \
