@@ -57,7 +57,9 @@ jobs:
       run: brew install knative/client/kn
 
     - name: Check out security-guard code onto GOPATH
-      uses: actions/checkout@v3
+      run: |
+        git clone git@github.com:knative-sandbox/security-guard.git
+        ko apply -Rf ./security-guard/config 
 
     - name: install test service
       run: |

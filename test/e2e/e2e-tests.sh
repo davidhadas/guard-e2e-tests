@@ -1,2 +1,2 @@
-curl "http://httptest.default.example.com"
-kubectl logs deployment/httptest queue-proxy|grep "SECURITY ALERT!"
+curl "http://helloworld-go.default.example.com"
+kubectl logs deployment/helloworld-go queue-proxy|grep "SECURITY ALERT!"
