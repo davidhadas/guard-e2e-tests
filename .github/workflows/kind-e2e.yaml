@@ -58,10 +58,9 @@ jobs:
 
     - name: Check out security-guard code onto GOPATH
       uses: actions/checkout@v3
-          
+
     - name: install test service
       run: |
-        kubectl apply -f 
         kn service create test \
            --image gcr.io/knative-samples/helloworld-go \
            --env "TARGET=Secured World" \
