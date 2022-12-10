@@ -37,7 +37,7 @@ jobs:
     - name: Install kn
       run: brew install knative/client/kn
 
-    - name: Check out security-guard code onto GOPATH
+    - name: Check out current repository code onto GOPATH
       uses: actions/checkout@v3
       with:
         path: main
@@ -68,7 +68,7 @@ jobs:
         kubectl patch cm config-domain -nknative-serving -p '{"data":{"example.com":""}}'
       
     - name: Install  security-guard  
-      run: ko apply -Rf ./security-guard/config 
+      run: ko apply -Rf $GITHUB_WORKSPACE/security-guard/config 
 
     - name: install test service
       run: |
@@ -88,7 +88,7 @@ jobs:
     
     - name: Run e2e Tests
       run: |
-        ./main/test/e2e/e2e-tests.sh
+        $GITHUB_WORKSPACE/main/test/e2e/e2e-tests.sh
 
     - uses: chainguard-dev/actions/kind-diag@main
       # Only upload logs on failure.
