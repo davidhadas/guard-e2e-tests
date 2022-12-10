@@ -1,7 +1,5 @@
 name: e2e
 
-on: workflow_dispatch
-
 on: 
   pull_request:
     branches: [ 'main' ]
